@@ -4,3 +4,4 @@ venv/
 atributos_bd.py
 pruebitas.py
 env
+*.http
