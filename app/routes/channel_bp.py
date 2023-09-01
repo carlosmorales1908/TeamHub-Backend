@@ -1,0 +1,9 @@
+from flask import Blueprint
+from ..controllers.channel_controller import ChannelController
+
+channel_bp = Blueprint('channel_bp', __name__)
+
+channel_bp.route("/channels/<int:channel_id>", methods = ['GET'])(ChannelController.get_channel)
+channel_bp.route("/all_channels/<int:server_id>", methods = ['GET'])(ChannelController.get_channels)
+# channel_bp.route("/servers", methods = ['POST'])(ChannelController.create_server)
+# channel_bp.route("/servers/<int:server_id>", methods = ['PUT'])(ChannelController.update_server)
