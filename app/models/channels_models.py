@@ -43,3 +43,19 @@ class Channel:
       return result
     else:
       return None
+  
+  @classmethod
+  def create_channel(cls,channel):
+    query = """INSERT INTO channels(channel_name,server_id) 
+      VALUES (%(channel_name)s,%(server_id)s);"""
+    params = channel.__dict__
+    DatabaseConnection.execute_query(query, params)
+  
+  @classmethod
+  def update_channel(cls,channel):
+    query="""UPDATE channels SET 
+      channel_name=%(channel_name)s,
+      server_id=%(server_id)s
+      WHERE channel_id=%(channel_id)s;"""
+    params=channel.__dict__
+    DatabaseConnection.execute_query(query, params=params)

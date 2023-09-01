@@ -18,3 +18,25 @@ class ChannelController:
         "server_name" : channel[2]
       })
     return {"Servers":channels, "total":len(channels)},200
+  
+  @classmethod
+  def create_channel(cls):
+    data = request.json
+    user = Channel(
+      channel_name = data["channel_name"],
+      server_id = data["server_id"]
+    )
+    Channel.create_channel(user)
+    return {}, 201
+  
+  @classmethod
+  def update_channel(cls,channel_id):
+    res=Channel.get_channel(Channel(channel_id = channel_id))
+    data = request.json
+
+    if ('channel_name' in data):
+      res.channel_name = data['channel_name']
+    if ('server_id' in data) :
+      res.server_id=data['server_id'] 
+    Channel.update_channel(res)
+    return {}, 200
