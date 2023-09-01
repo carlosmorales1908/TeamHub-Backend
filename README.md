@@ -1,3 +1,4 @@
-# Todavía no hcimos nada del back
+# Ya hicimos algo
 
-## no sabmoes que hacer aqui
+## Todavía no sabemos que hacer
+## Aguante messi
