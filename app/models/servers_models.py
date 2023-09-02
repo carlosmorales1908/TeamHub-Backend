@@ -12,26 +12,32 @@ class Server:
       "server_id": self.server_id,
       "server_name": self.server_name,
       "description": self.description,
-      "img_server": self.img_server,
+      "img_server": self.img_server
     }
   
   @classmethod
   def get_server(cls, server):
     """
     """
-    query = """SELECT * FROM servers 
-    WHERE server_id = %(server_id)s"""
+    # query = """SELECT * FROM servers 
+    # WHERE server_id = %(server_id)s"""
+    query = """SELECT s.server_id, s.server_name, s.description, s.img_server, c.channel_name, c.channel_id FROM servers s 
+            INNER JOIN channels c ON s.server_id = c.server_id 
+            WHERE s.server_id =  %(server_id)s"""
     params = server.__dict__
-    result = DatabaseConnection.fetch_one(query, params=params)
-
+    result = DatabaseConnection.fetch_all(query, params=params)
     if result is not None:
-      return cls(
-        server_id = result[0],
-        server_name = result[1],
-        description = result[2],
-        img_server = result[3]
-      )
+      return result
     return None
+
+    # if result is not None:
+    #   return cls(
+    #     server_id = result[0],
+    #     server_name = result[1],
+    #     description = result[2],
+    #     img_server = result[3]
+    #   )
+    # return None
   
   @classmethod
   def get_servers(cls):

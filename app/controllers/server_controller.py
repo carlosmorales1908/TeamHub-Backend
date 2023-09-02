@@ -5,7 +5,20 @@ class ServerController:
   @classmethod
   def get_server(cls,server_id):
     server = Server.get_server(Server(server_id = server_id))
-    return server.serialize(),200
+    channels = []
+    for channel in server:
+      channels.append({
+        "channel_name":channel[4],
+        "channel_id":channel[5]
+      })
+    # channels = [channel[4] for name,id in server]
+    return {
+      "server_id": server[0][0],
+      "server_name": server[0][1],
+      "description": server[0][2],
+      "img_server": server[0][3],
+      "channels":channels
+    }
   
   @classmethod
   def get_servers(cls):
