@@ -24,10 +24,38 @@ class User:
     }
   
   @classmethod
+  def is_registered(cls, user):
+    query = """SELECT user_id FROM users
+    WHERE user_name = %(user_name)s and password = %(password)s"""
+    params = user.__dict__
+    result = DatabaseConnection.fetch_one(query, params=params)
+
+    if result is not None:
+        return True
+    return False
+  
+  @classmethod
+  def get_user_by_name(cls, user):
+    query = """SELECT * FROM users
+    WHERE user_name = %(user_name)s"""
+    params = user.__dict__
+    result = DatabaseConnection.fetch_one(query, params=params)
+
+    if result is not None:
+        return cls(
+        user_id = result[0],
+        user_name = result[1],
+        password = result[2],
+        email = result[3],
+        first_name = result[4],
+        last_name = result[5],
+        date_of_birth = result[6]
+        )
+    return None
+  
+  @classmethod
   def get_user(cls, user):
     """
-    Recibe como parámetro objeto de tipo User.
-    Retorna una tupla con los datos del usuario si lo encuentra
     """
     query = """SELECT * FROM users 
     WHERE user_id = %(user_id)s"""
@@ -42,7 +70,7 @@ class User:
         email = result[3],
         first_name = result[4],
         last_name = result[5],
-        date_of_birth = result[6],
+        date_of_birth = result[6]
       )
     return None
   

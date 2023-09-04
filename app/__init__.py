@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from config import Config
 
-# from .routes.auth_bp import auth_bp
+from .routes.auth_bp import auth_bp
 from .routes.user_bp import user_bp
 from .routes.server_bp import server_bp
 from .routes.channel_bp import channel_bp
@@ -19,7 +19,7 @@ def init_app():
   )
   DatabaseConnection.set_config(app.config)
 
-  # app.register_blueprint(auth_bp, url_prefix = '/auth')
+  app.register_blueprint(auth_bp, url_prefix = '/auth')
   app.register_blueprint(user_bp, url_prefix = '/api')
   app.register_blueprint(server_bp, url_prefix = '/api')
   app.register_blueprint(channel_bp, url_prefix = '/api')
