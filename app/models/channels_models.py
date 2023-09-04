@@ -17,17 +17,26 @@ class Channel:
   def get_channel(cls, server):
     """
     """
-    query = """SELECT * FROM channels 
-    WHERE channel_id = %(channel_id)s"""
-    params = server.__dict__
-    result = DatabaseConnection.fetch_one(query, params=params)
+    # query = """SELECT * FROM channels 
+    # WHERE channel_id = %(channel_id)s"""
+    # params = server.__dict__
+    # result = DatabaseConnection.fetch_one(query, params=params)
 
+    # if result is not None:
+    #   return cls(
+    #     channel_id = result[0],
+    #     channel_name = result[1],
+    #     server_id = result[2]
+    #   )
+    # return None
+    query = """select c.channel_id, c.channel_name, m.message_id, m.message, m.creation_date, m.user_id from channels c
+          inner join servers s on c.server_id = s.server_id
+          inner join messages m on c.channel_id = m.channel_id
+          where c.channel_id =  %(channel_id)s"""
+    params = server.__dict__
+    result = DatabaseConnection.fetch_all(query, params=params)
     if result is not None:
-      return cls(
-        channel_id = result[0],
-        channel_name = result[1],
-        server_id = result[2]
-      )
+      return result
     return None
   
   @classmethod

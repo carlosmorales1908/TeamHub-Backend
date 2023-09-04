@@ -5,7 +5,21 @@ class ChannelController:
   @classmethod
   def get_channel(cls,channel_id):
     channel = Channel.get_channel(Channel(channel_id = channel_id))
-    return channel.serialize(),200
+    messages = []
+    for message in channel:
+      messages.append({
+        "message_id":message[2],
+        "message":message[3],
+        "creation_date":message[4],
+        "user_id":message[5]
+      })
+    # channels = [channel[4] for name,id in server]
+    return {
+      "channel_id": channel[0][0],
+      "channel_name": channel[0][1],
+      "messages":messages
+    }
+    # return channel.serialize(),200
   
   @classmethod
   def get_channels(cls,server_id):
