@@ -1,4 +1,5 @@
 from ..models.servers_models import Server
+from ..models.server_user_models import Server_User
 from flask import request, session
 
 class ServerController:
@@ -41,6 +42,9 @@ class ServerController:
       description = data["description"]
     )
     Server.create_server(user)
+    
+    server_user = Server_User(user_id = data["user_id"])
+    Server_User.create_server_user(server_user)
     return {}, 201
   
   @classmethod
@@ -55,4 +59,14 @@ class ServerController:
     if ('img_server' in data)  :
       res.img_server=data['img_server'] 
     Server.update_server(res)
+    return {}, 200
+  
+  @classmethod
+  def join_server(cls):
+    data = request.json
+    server_user = Server_User(
+      user_id = data["user_id"],
+      server_id = data["server_id"]
+      )
+    Server_User.join_server(server_user)
     return {}, 200

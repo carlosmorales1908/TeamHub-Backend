@@ -7,3 +7,4 @@ server_bp.route("/servers/<int:server_id>", methods = ['GET'])(ServerController.
 server_bp.route("/all_servers", methods = ['GET'])(ServerController.get_servers)
 server_bp.route("/servers", methods = ['POST'])(ServerController.create_server)
 server_bp.route("/servers/<int:server_id>", methods = ['PUT'])(ServerController.update_server)
+server_bp.route("/join_server", methods = ['POST'])(ServerController.join_server)
