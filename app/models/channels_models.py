@@ -68,3 +68,17 @@ class Channel:
       WHERE channel_id=%(channel_id)s;"""
     params=channel.__dict__
     DatabaseConnection.execute_query(query, params=params)
+
+  @classmethod
+  def show_channels_server(cls,server_user):
+    query="""SELECT c.channel_id, c.channel_name, s_u.rol, s.server_name, s_u.user_id, u.user_name, s_u.server_id  FROM server_user s_u
+    INNER JOIN channels c ON s_u.server_id = c.server_id
+    INNER JOIN servers s ON s_u.server_id = s.server_id
+    INNER JOIN users u ON s_u.user_id = u.user_id
+    WHERE u.user_id = %(user_id)s AND s_u.server_id=%(server_id)s;"""
+    params = server_user.__dict__
+    result = DatabaseConnection.fetch_all(query, params=params)
+    if result is not None:
+      return result
+    else:
+      return None

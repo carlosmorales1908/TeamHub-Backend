@@ -1,4 +1,5 @@
 from ..models.channels_models import Channel
+from ..models.server_user_models import Server_User
 from flask import request, session
 
 class ChannelController:
@@ -54,3 +55,28 @@ class ChannelController:
       res.server_id=data['server_id'] 
     Channel.update_channel(res)
     return {}, 200
+  
+  @classmethod
+  def show_channels_server(cls):
+    """
+    Muestra los canales de un servidor cuando se lo selecciona y el rol del usuario
+    """
+    data = request.json
+    result = Channel.show_channels_server(Server_User(
+      user_id = data["user_id"],
+      server_id = data["server_id"]
+    ))
+
+    channels=[]
+    for channel in result:
+      channels.append({
+        "channel_id":channel[0],
+        "channel_name":channel[1],
+      })
+    return {"Channels":channels, 
+            "rol":channel[2],
+            "server_name":channel[3],
+            "user_id":channel[4],
+            "user_name":channel[5],
+            "server_id":channel[6]},200
+    

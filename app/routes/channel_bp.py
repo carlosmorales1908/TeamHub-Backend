@@ -7,3 +7,5 @@ channel_bp.route("/channels/<int:channel_id>", methods = ['GET'])(ChannelControl
 channel_bp.route("/all_channels/<int:server_id>", methods = ['GET'])(ChannelController.get_channels)
 channel_bp.route("/channels", methods = ['POST'])(ChannelController.create_channel)
 channel_bp.route("/channels/<int:channel_id>", methods = ['PUT'])(ChannelController.update_channel)
+
+channel_bp.route("/show_channels", methods = ['GET'])(ChannelController.show_channels_server)
