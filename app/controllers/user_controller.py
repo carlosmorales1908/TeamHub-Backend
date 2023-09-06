@@ -1,4 +1,5 @@
 from ..models.user_model import User
+from ..models.server_user_models import Server_User
 from flask import request, session
 
 class UserController:
@@ -43,3 +44,17 @@ class UserController:
 
     User.update_user(res)
     return {}, 200
+  
+  @classmethod
+  def get_user_server(cls):
+    data = request.json
+    user_name = data["user_name"]
+    res=Server_User.get_user_server(User(user_name = user_name))
+    servers = []
+    for server in res:
+      servers.append({
+        "server_id" : server[0],
+        "server_name" : server[1],
+        "server_img": server[3]
+      })
+    return {"Servers":servers, "user_id":res[0][2], "user_name":user_name},200

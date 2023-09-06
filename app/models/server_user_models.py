@@ -16,6 +16,18 @@ class Server_User:
     }
   
   @classmethod
+  def get_user_server(cls,user):
+    query = """SELECT s_u.server_id, s.server_name, s_u.user_id, s.img_server FROM server_user s_u
+    INNER JOIN servers s ON s_u.server_id = s.server_id
+    INNER JOIN users u ON s_u.user_id = u.user_id
+    WHERE u.user_name= %(user_name)s;"""
+    params = user.__dict__
+    result = DatabaseConnection.fetch_all(query, params=params)
+    if result is not None:
+      return result
+    return None
+  
+  @classmethod
   def create_server_user(cls,server_user):
     query1 = """SET @last_server_id =last_insert_id();"""
     DatabaseConnection.execute_query(query1)
