@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, session
 from flask_cors import CORS
 from config import Config
 
@@ -24,5 +24,12 @@ def init_app():
   app.register_blueprint(server_bp, url_prefix = '/api')
   app.register_blueprint(channel_bp, url_prefix = '/api')
   app.register_blueprint(message_bp, url_prefix = '/api')
-  
+
+  # PROTEGE RUTAS ANTES DE INICAR SESION
+  @app.before_request
+  def antes_de_cada_peticion():
+    ruta = request.path
+    if not 'user' in session and ruta != "/login" and ruta != "/profile" and ruta != "/logout" and not ruta.startswith("/auth"):
+        return {"msg":"Debes iniciar sesion primero"},404
+    
   return app
