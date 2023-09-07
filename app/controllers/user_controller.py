@@ -1,12 +1,16 @@
 from ..models.user_model import User
 from ..models.server_user_models import Server_User
+from ..models.exceptions import IdNotFound
 from flask import request, session
 
 class UserController:
   @classmethod
   def get_user(cls,user_id):
     user = User.get_user(User(user_id = user_id))
-    return user.serialize(),200
+    if user is not None:
+            return user.serialize(), 200
+    else:
+        raise IdNotFound(description= f"Film with id {user_id} not found")
   
   @classmethod
   def create_user(cls):
