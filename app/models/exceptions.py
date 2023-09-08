@@ -1,24 +1,47 @@
 from flask import jsonify
+from werkzeug.exceptions import HTTPException
 
-class CustomException(Exception):
-    def __init__(self, status_code, name = "Custom Error", description = 'Error'): 
-        super().__init__()
-        self.description = description
-        self.name = name
-        self.status_code = status_code
+class NotFound(HTTPException):
+  def __init__(self, description = "Error: NotFound"):
+    super().__init__(description)
+    self.code = 404
 
-    def get_response(self):
-        response = jsonify({
-            'error': {
-                'code': self.status_code,
-                'name': self.name,
-                'description': self.description,
-            }
-        })
-        response.status_code = self.status_code
-        return response
+  def get_response(self):
+    response = jsonify({
+    'error': {
+    'name': "Not Found",
+    'code': self.code,
+    'description': self.description,
+    }
+    })
+    return response
 
-class IdNotFound(CustomException):
-    def __init__(self,description, status_code = 404, name = "Film Not Found"):
-        super().__init__(status_code, name, description)
-        description= description
+class BadRequest(HTTPException):
+  def __init__(self, description = "Error: BadRequest"):
+    super().__init__(description)
+    self.code = 400
+
+  def get_response(self):
+    response = jsonify({
+    'error': {
+    'name': "Bad Request",
+    'code': self.code,
+    'description': self.description,
+    }
+    })
+    return response
+
+class Forbidden(HTTPException):
+  def __init__(self, description = "Error: Forbidden"):
+    super().__init__(description)
+    self.code = 403
+
+  def get_response(self):
+    response = jsonify({
+    'error': {
+    'name': "Forbidden",
+    'code': self.code,
+    'description': self.description,
+    }
+    })
+    return response

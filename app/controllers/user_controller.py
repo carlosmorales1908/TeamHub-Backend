@@ -1,6 +1,6 @@
 from ..models.user_model import User
 from ..models.server_user_models import Server_User
-from ..models.exceptions import IdNotFound
+from ..models.exceptions import NotFound
 from flask import request, session
 
 class UserController:
@@ -10,7 +10,7 @@ class UserController:
     if user is not None:
             return user.serialize(), 200
     else:
-        raise IdNotFound(description= f"Film with id {user_id} not found")
+        raise NotFound(description= f"User with id {user_id} not found")
   
   @classmethod
   def create_user(cls):
