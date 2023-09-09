@@ -41,7 +41,7 @@ class Message:
     """
     """
     query = """INSERT INTO messages(message,user_id,channel_id) 
-          VALUES(%(message)s,%(user_id)s,%(channel_id)s)"""
+      VALUES (%(message)s,%(user_id)s,%(channel_id)s);"""
     params = message.__dict__
     DatabaseConnection.execute_query(query, params)
 

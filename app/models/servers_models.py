@@ -27,6 +27,20 @@ class Server:
     if result is not None:
       return result
     return None
+  
+  @classmethod
+  def get_only_server(cls,server):
+    query = """SELECT * FROM servers WHERE server_id =  %(server_id)s"""
+    params = server.__dict__
+    result = DatabaseConnection.fetch_one(query, params=params)
+    if result is not None:
+      return cls(
+        server_id = result[0],
+        server_name = result[1],
+        description = result[2],
+        img_server = result[3]
+      )
+    return None
 
   @classmethod
   def get_servers(cls):

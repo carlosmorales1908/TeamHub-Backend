@@ -28,6 +28,19 @@ class Channel:
     return None
   
   @classmethod
+  def get_only_channel(cls,channel):
+    query = """SELECT * FROM channels WHERE channel_id =  %(channel_id)s"""
+    params = channel.__dict__
+    result = DatabaseConnection.fetch_one(query, params=params)
+    if result is not None:
+      return cls(
+        channel_id = result[0],
+        channel_name = result[1],
+        server_id = result[2]
+      )
+    return None
+  
+  @classmethod
   def get_channels(cls,channel):
     sql = """SELECT c.channel_id, c.channel_name, s.server_name FROM channels c
         INNER JOIN servers s ON c.server_id = s.server_id
