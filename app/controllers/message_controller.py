@@ -18,13 +18,13 @@ class MessageController:
     data = request.json
 
     # --- VALIDATIONS
-    # validate_value_in_data("message",data)
-    # validate_value_in_data("user_id",data)
-    # validate_value_in_data("channel_id",data)
-    # validate_is_string(data["message"])
-    # validate_is_int(data["user_id"])
-    # validate_is_int(data["channel_id"])
-    # validate_len_message(data["message"])
+    validate_value_in_data("message",data)
+    validate_value_in_data("user_id",data)
+    validate_value_in_data("channel_id",data)
+    validate_is_string(data["message"])
+    validate_is_int(data["user_id"])
+    validate_is_int(data["channel_id"])
+    validate_len_message(data["message"])
     # ---
 
     message = Message(**data)
