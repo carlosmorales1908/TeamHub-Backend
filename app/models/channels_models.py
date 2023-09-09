@@ -17,18 +17,6 @@ class Channel:
   def get_channel(cls, server):
     """
     """
-    # query = """SELECT * FROM channels 
-    # WHERE channel_id = %(channel_id)s"""
-    # params = server.__dict__
-    # result = DatabaseConnection.fetch_one(query, params=params)
-
-    # if result is not None:
-    #   return cls(
-    #     channel_id = result[0],
-    #     channel_name = result[1],
-    #     server_id = result[2]
-    #   )
-    # return None
     query = """select c.channel_id, c.channel_name, m.message_id, m.message, m.creation_date, m.user_id from channels c
           inner join servers s on c.server_id = s.server_id
           inner join messages m on c.channel_id = m.channel_id
@@ -41,8 +29,6 @@ class Channel:
   
   @classmethod
   def get_channels(cls,channel):
-    # sql = """SELECT * FROM channels 
-    # WHERE server_id = %(server_id)s"""
     sql = """SELECT c.channel_id, c.channel_name, s.server_name FROM channels c
         INNER JOIN servers s ON c.server_id = s.server_id
         WHERE c.server_id =  %(server_id)s;"""
@@ -68,6 +54,19 @@ class Channel:
       WHERE channel_id=%(channel_id)s;"""
     params=channel.__dict__
     DatabaseConnection.execute_query(query, params=params)
+  
+  @classmethod
+  def delete_channel(cls, channel):
+    query = "DELETE FROM channels WHERE channel_id = %s"
+    params = channel.channel_id,
+    DatabaseConnection.execute_query(query, params=params)
+  
+  @classmethod
+  def exists(cls,channel_id):
+    query = """SELECT * FROM channels WHERE channel_id = %s"""
+    params = channel_id,
+    result = DatabaseConnection.fetch_one(query, params=params)
+    return bool(result)
 
   @classmethod
   def show_channels_server(cls,server_user):
