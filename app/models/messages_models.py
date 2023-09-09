@@ -61,3 +61,10 @@ class Message:
     WHERE message_id = %(message_id)s;"""
     params = message.__dict__
     DatabaseConnection.execute_query(sql, params)
+  
+  @classmethod
+  def exists(cls,message_id):
+    query = """SELECT * FROM users WHERE user_id = %s"""
+    params = message_id,
+    result = DatabaseConnection.fetch_one(query, params=params)
+    return bool(result)

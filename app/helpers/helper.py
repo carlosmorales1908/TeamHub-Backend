@@ -23,6 +23,10 @@ def validate_len(attribute):
 def validate_len_password(password):
   if len(password) < 8:
     raise BadRequest(description = f"password must have more than 8 characters")
+  
+def validate_len_message(message):
+  if len(message) < 1:
+    raise BadRequest(description = f"message must have more than 1 characters")
 
 def validate_value_in_data(value,data):
   if not value in data:
