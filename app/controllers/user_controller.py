@@ -36,14 +36,7 @@ class UserController:
     validate_dob(data["date_of_birth"])
     # ---
 
-    user = User(
-      first_name = data["first_name"],
-      last_name = data["last_name"],
-      email = data["email"],
-      user_name = data["user_name"],
-      password = data["password"],
-      date_of_birth = data["date_of_birth"],
-    )
+    user = User(**data)
     User.create_user(user)
     return {}, 201
   
@@ -83,7 +76,7 @@ class UserController:
       user.profile_picture=data['profile_picture'] 
 
     User.update_user(user)
-    return {}, 200
+    return {'message': 'User updated successfully'}, 200
   
   @classmethod
   def get_user_server(cls):
@@ -98,3 +91,14 @@ class UserController:
         "server_img": server[3]
       })
     return {"Servers":servers, "user_id":res[0][2], "user_name":user_name},200
+  
+  @classmethod
+  def delete(cls, user_id):
+    """Delete a film"""
+    user = User(user_id=user_id)
+
+    if not User.exists(user_id):
+      raise NotFound(description= f"User with id {user_id} Not Found to Delete")
+    
+    User.delete(user)
+    return {'message': 'User deleted successfully'}, 204

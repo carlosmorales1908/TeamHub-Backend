@@ -101,6 +101,12 @@ class User:
     DatabaseConnection.execute_query(query, params=params)
   
   @classmethod
+  def delete(cls, user):
+    query = "DELETE FROM users WHERE user_id = %s"
+    params = user.user_id,
+    DatabaseConnection.execute_query(query, params=params)
+  
+  @classmethod
   def exists(cls,user_id):
     query = """SELECT * FROM users WHERE user_id = %s"""
     params = user_id,
