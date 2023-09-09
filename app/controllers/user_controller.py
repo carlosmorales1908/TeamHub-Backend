@@ -1,6 +1,7 @@
 from ..models.user_model import User
 from ..models.server_user_models import Server_User
 from ..models.exceptions import NotFound
+from ..helpers.helper import *
 from flask import request, session
 
 class UserController:
@@ -15,6 +16,26 @@ class UserController:
   @classmethod
   def create_user(cls):
     data = request.json
+
+    # --- VALIDATIONS
+    validate_value_in_data("first_name",data)
+    validate_is_string(data["first_name"])
+    validate_len(data["first_name"])
+    validate_value_in_data("last_name",data)
+    validate_is_string(data["last_name"])
+    validate_len(data["last_name"])
+    validate_value_in_data("email",data)
+    validate_is_string(data["email"])
+    validate_value_in_data("user_name",data)
+    validate_is_string(data["user_name"])
+    validate_len(data["user_name"])
+    validate_value_in_data("password",data)
+    validate_is_string(data["password"])
+    validate_len_password(data["password"])
+    validate_value_in_data("date_of_birth",data)
+    validate_dob(data["date_of_birth"])
+    # ---
+
     user = User(
       first_name = data["first_name"],
       last_name = data["last_name"],
@@ -28,25 +49,40 @@ class UserController:
   
   @classmethod
   def update_user(cls,user_id):
-    res=User.get_user(User(user_id = user_id))
+    user=User.get_user(User(user_id = user_id))
     data = request.json
+    
+    # ------ VALIDATION USER EXIST
+    if not User.exists(user_id):
+      raise NotFound(description= f"User with id {user_id} Not Found to Update")
+    # ------
 
     if ('first_name' in data):
-      res.first_name = data['first_name']
+      validate_is_string(data["first_name"])
+      validate_len(data["first_name"])
+      user.first_name = data['first_name']
     if ('last_name' in data) :
-      res.last_name=data['last_name'] 
+      validate_len(data["last_name"])
+      validate_is_string(data["last_name"]) 
+      user.last_name=data['last_name'] 
     if ('email' in data)  :
-      res.email=data['email'] 
+      validate_is_string(data["email"])
+      user.email=data['email'] 
     if ('user_name' in data) :
-      res.user_name=data['user_name']  
+      validate_is_string(data["user_name"])
+      validate_len(data["user_name"])
+      user.user_name=data['user_name']  
     if ('password' in data) :
-      res.password=data['password']  
+      validate_is_string(data["password"])
+      validate_len_password(data["password"])
+      user.password=data['password']  
     if ('date_of_birth' in data) :
-      res.date_of_birth=data['date_of_birth'] 
+      validate_dob(data["date_of_birth"])
+      user.date_of_birth=data['date_of_birth'] 
     if ('profile_picture' in data) :
-      res.profile_picture=data['profile_picture'] 
+      user.profile_picture=data['profile_picture'] 
 
-    User.update_user(res)
+    User.update_user(user)
     return {}, 200
   
   @classmethod

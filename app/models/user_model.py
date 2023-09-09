@@ -29,7 +29,6 @@ class User:
     WHERE user_name = %(user_name)s and password = %(password)s"""
     params = user.__dict__
     result = DatabaseConnection.fetch_one(query, params=params)
-
     if result is not None:
         return True
     return False
@@ -100,3 +99,10 @@ class User:
       WHERE user_id=%(user_id)s;"""
     params=user.__dict__
     DatabaseConnection.execute_query(query, params=params)
+  
+  @classmethod
+  def exists(cls,user_id):
+    query = """SELECT * FROM users WHERE user_id = %s"""
+    params = user_id,
+    result = DatabaseConnection.fetch_one(query, params=params)
+    return bool(result)

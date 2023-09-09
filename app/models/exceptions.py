@@ -45,3 +45,18 @@ class Forbidden(HTTPException):
     }
     })
     return response
+
+class ServerError(HTTPException):
+  def __init__(self, description = "Error: ServerError"):
+    super().__init__(description)
+    self.code = 500
+
+  def get_response(self):
+    response = jsonify({
+    'error': {
+    'name': "Server Error",
+    'code': self.code,
+    'description': self.description,
+    }
+    })
+    return response
