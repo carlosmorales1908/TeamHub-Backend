@@ -47,7 +47,9 @@ class ServerController:
     # --- VALIDATIONS
     validate_value_in_data("server_name",data)
     validate_value_in_data("description",data)
+    validate_value_in_data("user_id",data)
     validate_is_string(data["server_name"])
+    validate_is_int(data["user_id"])
     validate_len(data["server_name"])
     # ---
 
@@ -92,6 +94,8 @@ class ServerController:
   def join_server(cls):
     data = request.json
 
+    validate_value_in_data("user_id",data)
+    validate_value_in_data("server_id",data)
     validate_is_int(data["user_id"])
     validate_is_int(data["server_id"])
 

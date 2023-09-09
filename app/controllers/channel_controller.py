@@ -90,10 +90,13 @@ class ChannelController:
     Muestra los canales de un servidor cuando se lo selecciona y el rol del usuario
     """
     data = request.json
-    result = Channel.show_channels_server(Server_User(
-      user_id = data["user_id"],
-      server_id = data["server_id"]
-    ))
+
+    validate_value_in_data("user_id",data)
+    validate_value_in_data("server_id",data)
+    validate_is_int(data["user_id"])
+    validate_is_int(data["server_id"])
+
+    result = Channel.show_channels_server(Server_User(**data))
 
     channels=[]
     for channel in result:
