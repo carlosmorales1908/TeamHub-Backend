@@ -19,8 +19,6 @@ class Server:
   def get_server(cls, server):
     """
     """
-    # query = """SELECT * FROM servers 
-    # WHERE server_id = %(server_id)s"""
     query = """SELECT s.server_id, s.server_name, s.description, s.img_server, c.channel_name, c.channel_id FROM servers s 
             INNER JOIN channels c ON s.server_id = c.server_id 
             WHERE s.server_id =  %(server_id)s"""
@@ -30,15 +28,6 @@ class Server:
       return result
     return None
 
-    # if result is not None:
-    #   return cls(
-    #     server_id = result[0],
-    #     server_name = result[1],
-    #     description = result[2],
-    #     img_server = result[3]
-    #   )
-    # return None
-  
   @classmethod
   def get_servers(cls):
     sql = "SELECT * FROM servers;"
@@ -64,3 +53,16 @@ class Server:
       WHERE server_id=%(server_id)s;"""
     params=server.__dict__
     DatabaseConnection.execute_query(query, params=params)
+  
+  @classmethod
+  def delete(cls, server):
+    query = "DELETE FROM servers WHERE server_id = %s"
+    params = server.server_id,
+    DatabaseConnection.execute_query(query, params=params)
+  
+  @classmethod
+  def exists(cls,server_id):
+    query = """SELECT * FROM servers WHERE server_id = %s"""
+    params = server_id,
+    result = DatabaseConnection.fetch_one(query, params=params)
+    return bool(result)

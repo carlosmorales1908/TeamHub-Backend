@@ -38,17 +38,15 @@ class UserController:
 
     user = User(**data)
     User.create_user(user)
-    return {}, 201
+    return {'message': 'User created successfully'}, 201
   
   @classmethod
   def update_user(cls,user_id):
     user=User.get_user(User(user_id = user_id))
     data = request.json
-    
-    # ------ VALIDATION USER EXIST
+
     if not User.exists(user_id):
       raise NotFound(description= f"User with id {user_id} Not Found to Update")
-    # ------
 
     if ('first_name' in data):
       validate_is_string(data["first_name"])
@@ -81,6 +79,9 @@ class UserController:
   @classmethod
   def get_user_server(cls):
     data = request.json
+
+    validate_is_string(data["user_name"])
+    
     user_name = data["user_name"]
     res=Server_User.get_user_server(User(user_name = user_name))
     servers = []
@@ -94,9 +95,8 @@ class UserController:
   
   @classmethod
   def delete(cls, user_id):
-    """Delete a film"""
     user = User(user_id=user_id)
-
+    
     if not User.exists(user_id):
       raise NotFound(description= f"User with id {user_id} Not Found to Delete")
     

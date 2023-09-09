@@ -11,6 +11,10 @@ def validate_dob(dob):
 def validate_is_string(attribute):
   if not isinstance(attribute, str):
     raise BadRequest(description= f"{attribute} must be a string.")
+  
+def validate_is_int(attribute):
+  if not isinstance(attribute, int):
+    raise BadRequest(description= f"{attribute} must be an integer.")
 
 def validate_len(attribute):
   if len(attribute) < 4:
