@@ -1,9 +1,13 @@
-# USO DE LA API
+<div id='id6' />
+
+# USO DE LA API :
 
 # **Índice :**
  ## 1. [Path relacionados a Users](#id1)
  ## 2. [Path relacionados a Servers](#id2)
- ## 2. [Path relacionados a Channels](#id3)
+ ## 3. [Path relacionados a Channels](#id3)
+ ## 4. [Path relacionados a Mesages](#id4)
+ ## 5. [Path relacionados a Authetication](#id5)
 
 <div id='id1' />
 
@@ -54,6 +58,9 @@ Elimina un usuario pasando su id en el path y usando el método DELETE. Ejemplo:
 
 DELETE http://127.0.0.1:5000/api/users/1
 
+## [Volver al Inicio](#id6)
+---
+
 <div id='id2' />
 
 # Path relacionados a Servers:
@@ -101,6 +108,9 @@ Elimina un servidor pasando su id en el path y usando el método DELETE. Ejemplo
 
 http://127.0.0.1:5000/api/servers/14
 
+## [Volver al Inicio](#id6)
+---
+
 <div id='id3' />
 
 # Path relacionados a Channels:
@@ -137,7 +147,7 @@ content-type: application/json
 ### PUT http://127.0.0.1:5000/api/channels/id :
 Permite actualizar un canal pasando el id del mismo en el path a través del método PUT. Además debe pasarse el contenido a modificar en un JSON. Ejemplo:
 
-PUT http://127.0.0.1:5000/api/channels/1
+http://127.0.0.1:5000/api/channels/1
 
 content-type: application/json
 
@@ -148,4 +158,70 @@ content-type: application/json
 ### DELETE http://127.0.0.1:5000/api/channels/id :
 Elimina un canal pasando el id del mismo en el path a través del método DELETE. Ejemplo:
 
-DELETE http://127.0.0.1:5000/api/channels/1
+http://127.0.0.1:5000/api/channels/1
+
+## [Volver al Inicio](#id6)
+---
+
+<div id='id4' />
+
+# Path relacionados a Mesages
+### GET http://127.0.0.1:5000/api/messages/id : 
+Devuelve un mensaje por su id usando el método GET. El id debe ser especificado en el path. Ejemplo:
+
+http://127.0.0.1:5000/api/messages/1
+
+### POST http://127.0.0.1:5000/api/messages :
+Permite crear un mensaje usando el método post. Los datos deben pasarse a través de un JSON y deben incluir: message(str), channel_id(int), user_id(int). Ejemplo:
+
+content-type: application/json
+
+{
+  "message":"Prueba de insertar mensaje en el canal 1",
+  "channel_id":1,
+  "user_id":1
+}
+
+### PUT http://127.0.0.1:5000/api/messages/id :
+Permite modificar un mensaje a usando el método PUT. Debe pasarse por la ruta el id del mensaje que se quiere modificar y en un JSON los datos a cambiar. Ejemplo:
+
+http://127.0.0.1:5000/api/messages/1
+
+content-type: application/json
+
+{
+  "message":"Se modificó el mensaje anterior"
+}
+
+### DELETE http://127.0.0.1:5000/api/messages/id :
+Permite elimianr un mensaje a través del método DELETE. Se debe pasar el id del mensaje a eliminar a través del path. Ejemplo:
+
+http://127.0.0.1:5000/api/messages/1
+
+## [Volver al Inicio](#id6)
+---
+
+<div id='id5' />
+
+# Path relacionados a Authetication
+
+### POST http://127.0.0.1:5000/auth/login :
+Permite iniciar sesión a través del método POST. Se debe pasar un JSON con los datos user_name(str) y password(str). Ejemplo:
+
+http://127.0.0.1:5000/auth/login
+
+content-type: application/json
+
+{
+"user_name":"John Doe",
+"password":"asdqwezxcqwe"
+}
+
+### GET http://127.0.0.1:5000/auth/profile :
+Devuelve los datos del usuario que inicia sesión
+
+### GET http://127.0.0.1:5000/auth/logout :
+Cierra la sesión del usuario.
+
+## [Volver al Inicio](#id6)
+---
