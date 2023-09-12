@@ -56,6 +56,8 @@ class ServerController:
     validate_is_string(data["server_name"])
     validate_is_int(data["user_id"])
     validate_len(data["server_name"])
+
+    invalid_data('server_id',data)
     # ---
 
     server = Server(**data)
@@ -74,6 +76,8 @@ class ServerController:
 
     if not Server.exists(server_id):
       raise NotFound(description= f"Server with id {server_id} Not Found")
+    
+    invalid_data('server_id',data)
     
     if ('server_name' in data):
       validate_is_string(data["server_name"])
@@ -105,6 +109,9 @@ class ServerController:
     validate_value_in_data("server_id",data)
     validate_is_int(data["user_id"])
     validate_is_int(data["server_id"])
+
+    invalid_data('server_user_id',data)
+    invalid_data('rol',data)
 
     server_user = Server_User(**data)
 

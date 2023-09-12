@@ -31,3 +31,7 @@ def validate_len_message(message):
 def validate_value_in_data(value,data):
   if not value in data:
     raise Forbidden(description = f"{value} is missing to create User")
+
+def invalid_data(value,data):
+  if value in data:
+        raise BadRequest(description=f"{value} must not be passed as a parameter")

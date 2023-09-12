@@ -34,6 +34,8 @@ class UserController:
     validate_len_password(data["password"])
     validate_value_in_data("date_of_birth",data)
     validate_dob(data["date_of_birth"])
+
+    invalid_data('user_id',data)
     # ---
 
     user = User(**data)
@@ -48,6 +50,8 @@ class UserController:
     if not User.exists(user_id):
       raise NotFound(description= f"User with id {user_id} Not Found to Update")
 
+    invalid_data('user_id',data)
+    
     if ('first_name' in data):
       validate_is_string(data["first_name"])
       validate_len(data["first_name"])

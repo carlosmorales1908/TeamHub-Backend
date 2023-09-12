@@ -25,6 +25,9 @@ class MessageController:
     validate_is_int(data["user_id"])
     validate_is_int(data["channel_id"])
     validate_len_message(data["message"])
+
+    invalid_data('message_id',data)
+    invalid_data('creation_date',data)
     # ---
 
     message = Message(**data)
@@ -37,6 +40,8 @@ class MessageController:
     data = request.json
 
     validate_value_in_data("message",data)
+    invalid_data('message_id',data)
+    invalid_data('creation_date',data)
 
     if ('message' in data):
       validate_is_string(data["message"])

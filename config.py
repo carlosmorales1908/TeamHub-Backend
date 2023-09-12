@@ -15,5 +15,3 @@ class Config:
 
     TEMPLATE_FOLDER = "templates/"
     STATIC_FOLDER = "static_folder/"
-
-print(Config.config['SECRET_KEY'])

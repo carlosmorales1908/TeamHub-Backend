@@ -29,11 +29,11 @@ def init_app():
 
   # PROTEGE RUTAS ANTES DE INICAR SESION
   # ------- COMENTAR PARA PROBAR LA API
-  @app.before_request
-  def antes_de_cada_peticion():
-    ruta = request.path
-    if not 'user' in session and ruta != "/login" and ruta != "/profile" and ruta != "/logout" and not ruta.startswith("/auth"):
-        return {"msg":"Debes iniciar sesion primero"},404
+  # @app.before_request
+  # def antes_de_cada_peticion():
+  #   ruta = request.path
+  #   if not 'user' in session and ruta != "/login" and ruta != "/profile" and ruta != "/logout" and not ruta.startswith("/auth"):
+  #       return {"msg":"Debes iniciar sesion primero"},404
   # -----
     
   return app

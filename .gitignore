@@ -1,6 +1,5 @@
 *.pyc
 .env
 venv/
-pruebitas.py
 env
 *.http

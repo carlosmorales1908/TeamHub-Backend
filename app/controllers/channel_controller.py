@@ -52,6 +52,8 @@ class ChannelController:
     validate_is_string(data["channel_name"])
     validate_is_int(data["server_id"])
     validate_len(data["channel_name"])
+
+    invalid_data('channel_id',data)
     # ---
 
     channel = Channel(**data)
@@ -67,6 +69,8 @@ class ChannelController:
 
     if not Channel.exists(channel_id):
       raise NotFound(description= f"Channel with id {channel_id} Not Found")
+    
+    invalid_data('channel_id',data)
     
     if ('channel_name' in data):
       validate_is_string(data["channel_name"])
