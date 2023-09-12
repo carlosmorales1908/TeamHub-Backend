@@ -1,5 +1,5 @@
 from ..database import DatabaseConnection
-from datetime import  datetime
+# from datetime import  datetime
 
 class User:
   def __init__(self, **kwargs):
@@ -71,7 +71,7 @@ class User:
         last_name = result[5],
         date_of_birth = result[6]
       )
-    return None
+    return NoneE
   
   @classmethod
   def create_user(cls,user):
@@ -110,5 +110,21 @@ class User:
   def exists(cls,user_id):
     query = """SELECT * FROM users WHERE user_id = %s"""
     params = user_id,
+    result = DatabaseConnection.fetch_one(query, params=params)
+    return bool(result)
+  
+  @classmethod
+  def verify_username(cls,user):
+    query = """SELECT user_id FROM users 
+    WHERE user_name = %(user_name)s;"""
+    params = user.__dict__
+    result = DatabaseConnection.fetch_one(query, params=params)
+    return bool(result)
+  
+  @classmethod
+  def verify_email(cls,user):
+    query = """SELECT user_id FROM users 
+    WHERE email = %(email)s;"""
+    params = user.__dict__
     result = DatabaseConnection.fetch_one(query, params=params)
     return bool(result)

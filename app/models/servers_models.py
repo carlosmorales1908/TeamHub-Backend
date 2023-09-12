@@ -80,3 +80,11 @@ class Server:
     params = server_id,
     result = DatabaseConnection.fetch_one(query, params=params)
     return bool(result)
+  
+  @classmethod
+  def verify_servername(cls,server):
+    query = """SELECT server_id FROM servers 
+    WHERE server_name = %(server_name)s;"""
+    params = server.__dict__
+    result = DatabaseConnection.fetch_one(query, params=params)
+    return bool(result)

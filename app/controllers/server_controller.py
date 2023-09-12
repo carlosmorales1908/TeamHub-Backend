@@ -61,6 +61,9 @@ class ServerController:
     # ---
 
     server = Server(**data)
+
+    verify_servername(server)
+    
     Server.create_server(server)
     
     server_user = Server_User(user_id = data["user_id"])
@@ -87,6 +90,8 @@ class ServerController:
       server.description=data['description'] 
     if ('img_server' in data)  :
       server.img_server=data['img_server'] 
+    
+    verify_servername(server)
       
     Server.update_server(server)
     return {'message': 'Server updated successfully'}, 200

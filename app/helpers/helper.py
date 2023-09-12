@@ -1,4 +1,6 @@
 from ..models.exceptions import BadRequest, Forbidden, ServerError
+from ..models.user_model import User
+from ..models.servers_models import Server
 from datetime import date
 
 def validate_dob(dob):
@@ -34,4 +36,16 @@ def validate_value_in_data(value,data):
 
 def invalid_data(value,data):
   if value in data:
-        raise BadRequest(description=f"{value} must not be passed as a parameter")
+    raise BadRequest(description=f"{value} must not be passed as a parameter")
+
+def verify_username(user):
+  if User.verify_username(user):
+    raise BadRequest(description="user_name already exist")
+  
+def verify_email(user):
+  if User.verify_email(user):
+    raise BadRequest(description="email already exist")
+
+def verify_servername(server):
+  if Server.verify_servername(server):
+    raise BadRequest(description="server_name already exist")

@@ -39,6 +39,10 @@ class UserController:
     # ---
 
     user = User(**data)
+    
+    verify_username(user)
+    verify_email(user)
+
     User.create_user(user)
     return {'message': 'User created successfully'}, 201
   
@@ -76,6 +80,9 @@ class UserController:
       user.date_of_birth=data['date_of_birth'] 
     if ('profile_picture' in data) :
       user.profile_picture=data['profile_picture'] 
+    
+    verify_username(user)
+    verify_email(user)
 
     User.update_user(user)
     return {'message': 'User updated successfully'}, 200
