@@ -41,16 +41,16 @@ class Channel:
     return None
   
   @classmethod
-  def get_channels(cls,channel):
-    sql = """SELECT c.channel_id, c.channel_name, s.server_name FROM channels c
-        INNER JOIN servers s ON c.server_id = s.server_id
-        WHERE c.server_id =  %(server_id)s;"""
-    params = channel.__dict__
-    result = DatabaseConnection.fetch_all(sql, params=params)
-    if result is not None:
-      return result
-    else:
-      return None
+  # def get_channels(cls,channel):
+  #   sql = """SELECT c.channel_id, c.channel_name, s.server_name FROM channels c
+  #       INNER JOIN servers s ON c.server_id = s.server_id
+  #       WHERE c.server_id =  %(server_id)s;"""
+  #   params = channel.__dict__
+  #   result = DatabaseConnection.fetch_all(sql, params=params)
+  #   if result is not None:
+  #     return result
+  #   else:
+  #     return None
   
   @classmethod
   def create_channel(cls,channel):

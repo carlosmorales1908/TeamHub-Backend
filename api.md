@@ -115,17 +115,12 @@ http://127.0.0.1:5000/api/servers/14
 
 # Path relacionados a Channels:
 ### GET http://127.0.0.1:5000/api/channels/id :
-Devuelve un canal, en caso de que exista, pasando su id en el path y usando el método GET. Ejemplo. 
+Devuelve un canal y los mensajes dentros del mismo, pasando su id en el path y usando el método GET. Ejemplo. 
 
 http://127.0.0.1:5000/api/channels/1
 
-### GET http://127.0.0.1:5000/api/all_channels/id :
-Devuelve todos los canales y los mensajes de un servidor, pasando el id del servidor en el path. Ejemplo:
-
-http://127.0.0.1:5000/api/all_channels/1
-
 ### GET http://127.0.0.1:5000/api/show_channels :
-Devuelve los canales de un servidor y el rol del usuario en ese servidor, usando el método GET. EL contenido de consulta debe pasarse por un JSON que debe incluir user_id(int) y server_id(int). Ejemplo: 
+Devuelve los canales de un servidor y el rol del usuario en ese servidor usando el método GET. EL contenido de la consulta debe pasarse por un JSON que debe incluir user_id(int) y server_id(int). Ejemplo: 
 
 content-type: application/json
 
