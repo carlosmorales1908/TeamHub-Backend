@@ -5,9 +5,14 @@ from ..helpers.helper import *
 from flask import request, session
 
 class ChannelController:
+  """
+  Channel controller class
+  """
   @classmethod
   def get_channel(cls,channel_id):
-
+    """
+    Get a channel by id
+    """
     if not Channel.exists(channel_id):
       raise NotFound(description= f"Channel with id {channel_id} Not Found")
     
@@ -44,6 +49,9 @@ class ChannelController:
   
   @classmethod
   def create_channel(cls):
+    """
+    Create a new channel
+    """
     data = request.json
 
     # --- VALIDATIONS
@@ -62,6 +70,9 @@ class ChannelController:
   
   @classmethod
   def update_channel(cls,channel_id):
+    """
+    Update a channel by id
+    """
     channel=Channel.get_channel(Channel(channel_id = channel_id))
     if not channel:
       channel = Channel.get_only_channel(Channel(channel_id = channel_id))
@@ -85,6 +96,9 @@ class ChannelController:
   
   @classmethod
   def delete_channel(cls, channel_id):
+    """
+    Delete a channel by id
+    """
     channel = Channel(channel_id=channel_id)
 
     if not Channel.exists(channel_id):
@@ -96,7 +110,7 @@ class ChannelController:
   @classmethod
   def show_channels_server(cls):
     """
-    Muestra los canales de un servidor cuando se lo selecciona y el rol del usuario
+    Show all channels on a server and the user rol
     """
     data = request.json
 

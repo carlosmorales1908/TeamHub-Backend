@@ -5,10 +5,14 @@ from ..helpers.helper import *
 from flask import request, session
 
 class ServerController:
-
+  """
+  Server controller class
+  """
   @classmethod
   def get_server(cls,server_id):
-
+    """
+    Get a server by id
+    """
     if not Server.exists(server_id):
       raise NotFound(description= f"Server with id {server_id} Not Found")
     
@@ -34,6 +38,9 @@ class ServerController:
   
   @classmethod
   def get_servers(cls):
+    """
+    Get all servers 
+    """
     result = Server.get_servers()
     servers=[]
     for server in result:
@@ -47,6 +54,9 @@ class ServerController:
   
   @classmethod
   def create_server(cls):
+    """
+    Create a new server
+    """
     data = request.json
 
     # --- VALIDATIONS
@@ -72,6 +82,9 @@ class ServerController:
   
   @classmethod
   def update_server(cls,server_id):
+    """
+    Update a server by id
+    """
     server=Server.get_server(Server(server_id = server_id))
     if not server:
       server = Server.get_only_server(Server(server_id = server_id))
@@ -98,6 +111,9 @@ class ServerController:
   
   @classmethod
   def delete(cls, server_id):
+    """
+    Delete a server by id
+    """
     server = Server(server_id=server_id)
 
     if not Server.exists(server_id):
@@ -108,6 +124,9 @@ class ServerController:
   
   @classmethod
   def join_server(cls):
+    """
+    Join a server
+    """
     data = request.json
 
     validate_value_in_data("user_id",data)

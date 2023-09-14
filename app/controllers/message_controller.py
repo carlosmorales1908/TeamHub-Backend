@@ -4,6 +4,9 @@ from ..helpers.helper import *
 from flask import request, session
 
 class MessageController:
+  """
+  Message controller class
+  """
   @classmethod
   def get_message(cls,message_id):
 
@@ -15,6 +18,9 @@ class MessageController:
   
   @classmethod
   def create_message(cls):
+    """
+    Create a new message
+    """
     data = request.json
 
     # --- VALIDATIONS
@@ -36,6 +42,9 @@ class MessageController:
   
   @classmethod
   def update_message(cls,message_id):
+    """
+    Update a message by id
+    """
     message=Message.get_message(Message(message_id = message_id))
     data = request.json
 
@@ -53,5 +62,8 @@ class MessageController:
   
   @classmethod
   def delete_message(self,message_id):
+    """
+    Delete a message by id
+    """
     Message.delete_message(Message(message_id = message_id))
     return {}, 201

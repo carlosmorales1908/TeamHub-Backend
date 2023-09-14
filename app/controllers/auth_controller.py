@@ -2,8 +2,14 @@ from ..models.auth.user_auth_model import UserAuth
 from flask import request, session
 
 class UserAuthController:
+  """
+  UserAuth controller class
+  """
   @classmethod
   def login(cls):
+    """
+    A user logs in
+    """
     data = request.json
     user = UserAuth(
       user_name = data.get('user_name'),
@@ -18,6 +24,9 @@ class UserAuthController:
       
   @classmethod
   def show_profile(cls):
+    """
+    Shows the data of a user logged
+    """
     user_name = ""
     if "user" in session:
       user_name = session['user']
@@ -29,5 +38,8 @@ class UserAuthController:
       
   @classmethod
   def logout(cls):
+    """
+    A user logs out
+    """
     session.pop('user', None)
     return {"message": "Sesion cerrada"}, 200
