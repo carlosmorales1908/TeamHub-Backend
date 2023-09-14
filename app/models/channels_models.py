@@ -1,12 +1,23 @@
 from ..database import DatabaseConnection
 
 class Channel:
+  """
+  Channel model class
+  """
   def __init__(self, **kwargs):
+    """
+    Constructor method
+    """
     self.channel_id = kwargs.get('channel_id')
     self.channel_name = kwargs.get('channel_name')
     self.server_id = kwargs.get('server_id')
 
   def serialize(self):
+    """
+    Serialize object representation
+      Returns:
+        dict: Object representation
+    """
     return {
       "channel_id": self.channel_id,
       "channel_name": self.channel_name,
@@ -14,14 +25,20 @@ class Channel:
     }
   
   @classmethod
-  def get_channel(cls, server):
+  def get_channel(cls, channel):
     """
+    Get a channel and its messages by channel_id
+    Args:
+      - channel: Channel object
+    Return:
+      - list or
+      - None
     """
     query = """select c.channel_id, c.channel_name, m.message_id, m.message, m.creation_date, m.user_id from channels c
           inner join servers s on c.server_id = s.server_id
           inner join messages m on c.channel_id = m.channel_id
           where c.channel_id =  %(channel_id)s"""
-    params = server.__dict__
+    params = channel.__dict__
     result = DatabaseConnection.fetch_all(query, params=params)
     if result is not None:
       return result
@@ -29,6 +46,14 @@ class Channel:
   
   @classmethod
   def get_only_channel(cls,channel):
+    """
+    Get a channel by channel_id
+    Args:
+      - channel: Channel object
+    Return:
+      - channel object or
+      - None
+    """
     query = """SELECT * FROM channels WHERE channel_id =  %(channel_id)s"""
     params = channel.__dict__
     result = DatabaseConnection.fetch_one(query, params=params)
@@ -40,7 +65,7 @@ class Channel:
       )
     return None
   
-  @classmethod
+  # @classmethod
   # def get_channels(cls,channel):
   #   sql = """SELECT c.channel_id, c.channel_name, s.server_name FROM channels c
   #       INNER JOIN servers s ON c.server_id = s.server_id
@@ -54,6 +79,11 @@ class Channel:
   
   @classmethod
   def create_channel(cls,channel):
+    """
+    Create a channel
+    Args:
+      - channel: Channel object
+    """
     query = """INSERT INTO channels(channel_name,server_id) 
       VALUES (%(channel_name)s,%(server_id)s);"""
     params = channel.__dict__
@@ -61,6 +91,11 @@ class Channel:
   
   @classmethod
   def update_channel(cls,channel):
+    """
+    Update a channel
+    Args:
+      - channel: Channel object
+    """
     query="""UPDATE channels SET 
       channel_name=%(channel_name)s,
       server_id=%(server_id)s
@@ -70,12 +105,24 @@ class Channel:
   
   @classmethod
   def delete_channel(cls, channel):
+    """
+    Delete a channel by channel_id
+    Args:
+      - channel: Channel object
+    """
     query = "DELETE FROM channels WHERE channel_id = %s"
     params = channel.channel_id,
     DatabaseConnection.execute_query(query, params=params)
   
   @classmethod
   def exists(cls,channel_id):
+    """
+    Check if a channel exist by channel_id
+    Args:
+      - channel_id
+    Return:
+      - boolean
+    """
     query = """SELECT * FROM channels WHERE channel_id = %s"""
     params = channel_id,
     result = DatabaseConnection.fetch_one(query, params=params)
@@ -83,6 +130,14 @@ class Channel:
 
   @classmethod
   def show_channels_server(cls,server_user):
+    """
+    Get all channels from a server
+    Args:
+      - server_user: server_user object
+    Return:
+      - a list with channels or
+      - None
+    """
     query="""SELECT c.channel_id, c.channel_name, s_u.rol, s.server_name, s_u.user_id, u.user_name, s_u.server_id  FROM server_user s_u
     INNER JOIN channels c ON s_u.server_id = c.server_id
     INNER JOIN servers s ON s_u.server_id = s.server_id

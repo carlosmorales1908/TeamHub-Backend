@@ -5,16 +5,25 @@ from ..helpers.helper import *
 from flask import request, session
 
 class UserController:
+  """
+  User controller class
+  """
   @classmethod
   def get_user(cls,user_id):
+    """
+    Get a user by id
+    """
     user = User.get_user(User(user_id = user_id))
     if user is not None:
-            return user.serialize(), 200
+      return user.serialize(), 200
     else:
-        raise NotFound(description= f"User with id {user_id} not found")
+      raise NotFound(description= f"User with id {user_id} not found")
   
   @classmethod
   def create_user(cls):
+    """
+    Create a new user
+    """
     data = request.json
 
     # --- VALIDATIONS
@@ -48,6 +57,9 @@ class UserController:
   
   @classmethod
   def update_user(cls,user_id):
+    """
+    Update a user by id
+    """
     user=User.get_user(User(user_id = user_id))
     data = request.json
 
@@ -89,6 +101,9 @@ class UserController:
   
   @classmethod
   def get_user_server(cls):
+    """
+    Get server and user info by user_name
+    """
     data = request.json
 
     validate_is_string(data["user_name"])
@@ -106,6 +121,9 @@ class UserController:
   
   @classmethod
   def delete(cls, user_id):
+    """
+    Delete a user by id
+    """
     user = User(user_id=user_id)
     
     if not User.exists(user_id):

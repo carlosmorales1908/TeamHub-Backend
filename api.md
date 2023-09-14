@@ -198,7 +198,7 @@ http://127.0.0.1:5000/api/messages/1
 
 <div id='id5' />
 
-# Path relacionados a Authetication
+# Path relacionados a Authentication
 
 ### POST http://127.0.0.1:5000/auth/login :
 Permite iniciar sesión a través del método POST. Se debe pasar un JSON con los datos user_name(str) y password(str). Ejemplo:
