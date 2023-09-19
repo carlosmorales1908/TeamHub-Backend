@@ -98,10 +98,10 @@ class User:
       return cls(
         user_id = result[0],
         user_name = result[1],
-        password = result[2],
+        password = result[5],
         email = result[3],
         first_name = result[4],
-        last_name = result[5],
+        last_name = result[2],
         date_of_birth = result[6]
       )
     return None
