@@ -18,7 +18,9 @@ class UserAuthController:
     
     if UserAuth.is_registered(user):
       session['user'] = data.get('user_name')
-      return {"message": "Sesion iniciada"}, 200
+      logged = UserAuth.after_loggin(user).__dict__
+      return {"user_id":logged["user_id"]},200
+      # return {"message": "Sesion iniciada"}, 200
     else:
       return {"message": "Usuario o contraseña incorrectos"}, 401
       
