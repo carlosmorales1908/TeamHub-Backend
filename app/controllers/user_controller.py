@@ -94,7 +94,7 @@ class UserController:
       user.profile_picture=data['profile_picture'] 
     
     verify_username(user)
-    verify_email(user)
+    # verify_email(user)
 
     User.update_user(user)
     return {'message': 'User updated successfully'}, 200
