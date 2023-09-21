@@ -114,7 +114,7 @@ class UserController:
         "server_name" : server[1],
         "server_img": server[3]
       })
-    return {"Servers":servers, "user_id":res[0][2], "user_id":user_id},200
+    return {"Servers":servers, "user_id":res[0][2], "user_id":user_id, "user_name":res[0][4]},200
   
   @classmethod
   def delete(cls, user_id):
