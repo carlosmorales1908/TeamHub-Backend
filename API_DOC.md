@@ -17,14 +17,10 @@
 Devuelve los datos de un usuario pasando su id en el path y usando el método GET. Ejemplo:
 
 http://127.0.0.1:5000/api/users/1
-### GET http://127.0.0.1:5000/api/user_server :
-Devuelve los servidores creados y a los cuales se encuentra unido un usuario. Debe pasarse un JSON con el método GET y nombre del usuario que inció la sesión. Ejemplo:
+### GET http://127.0.0.1:5000/api/user_server/id :
+Devuelve los servidores creados y a los cuales se encuentra unido un usuario a través de su id. Ejemplo:
 
-content-type: application/json
-
-{
-  "user_name": "John Doe"
-}
+http://127.0.0.1:5000/api/user_server/1
 ### POST http://127.0.0.1:5000/api/users :
 Crea un usuario usando el método POST. Los datos deben pasarse por JSON. Los mismos deben ser first_name(string),last_name(string), email(string), user_name(string), password(string) y date_of_birth(string con formato yy/mm/dd). Ejemplo:
 

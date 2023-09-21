@@ -100,16 +100,13 @@ class UserController:
     return {'message': 'User updated successfully'}, 200
   
   @classmethod
-  def get_user_server(cls):
+  def get_user_server(cls,user_id):
     """
     Get server and user info by user_name
     """
-    data = request.json
-
-    validate_is_string(data["user_name"])
-    
-    user_name = data["user_name"]
-    res=Server_User.get_user_server(User(user_name = user_name))
+    # validate_is_string(data["user_name"])
+    # user_name = data["user_name"]
+    res=Server_User.get_user_server(User(user_id = user_id))
     servers = []
     for server in res:
       servers.append({
@@ -117,7 +114,7 @@ class UserController:
         "server_name" : server[1],
         "server_img": server[3]
       })
-    return {"Servers":servers, "user_id":res[0][2], "user_name":user_name},200
+    return {"Servers":servers, "user_id":res[0][2], "user_id":user_id},200
   
   @classmethod
   def delete(cls, user_id):

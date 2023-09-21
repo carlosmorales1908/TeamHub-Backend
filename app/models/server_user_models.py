@@ -39,7 +39,7 @@ class Server_User:
     query = """SELECT s_u.server_id, s.server_name, s_u.user_id, s.img_server FROM server_user s_u
     INNER JOIN servers s ON s_u.server_id = s.server_id
     INNER JOIN users u ON s_u.user_id = u.user_id
-    WHERE u.user_name= %(user_name)s;"""
+    WHERE u.user_id= %(user_id)s;"""
     params = user.__dict__
     result = DatabaseConnection.fetch_all(query, params=params)
     if result is not None:
