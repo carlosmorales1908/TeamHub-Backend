@@ -18,9 +18,9 @@ class UserAuthController:
     
     if UserAuth.is_registered(user):
       session['user'] = data.get('user_name')
-      logged = UserAuth.after_loggin(user).__dict__
-      return {"user_id":logged["user_id"]},200
-      # return {"message": "Sesion iniciada"}, 200
+      # logged = UserAuth.after_loggin(user).__dict__
+      # return {"user_id":logged["user_id"]},200
+      return {"message": "Sesion iniciada"}, 200
     else:
       return {"message": "Usuario o contraseña incorrectos"}, 401
       
@@ -29,10 +29,11 @@ class UserAuthController:
     """
     Shows the data of a user logged
     """
-    user_name = ""
-    if "user" in session:
-      user_name = session['user']
-    user = UserAuth.get_user_by_name(UserAuth(user_name = user_name))
+    username = session.get('username')
+    # user_name = ""
+    # if "user" in session:
+    #   user_name = session['user']
+    user = UserAuth.get_user_by_name(UserAuth(user_name = username))
     if user is None:
       return {"message": "Usuario no encontrado"}, 404
     else:
