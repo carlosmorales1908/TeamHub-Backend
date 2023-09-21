@@ -28,7 +28,10 @@ class UserAuth:
     WHERE user_name = %(user_name)s and password = %(password)s"""
     params = user.__dict__
     result = DatabaseConnection.fetch_one(query, params=params)
-    return bool(result)
+    
+    if result is not None:
+      return True
+    return False
   
   @classmethod
   def get_user_by_name(cls, user):
