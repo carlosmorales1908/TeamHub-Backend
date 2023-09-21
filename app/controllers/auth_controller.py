@@ -20,6 +20,7 @@ class UserAuthController:
       session['user_name'] = data.get('user_name')
       # logged = UserAuth.after_loggin(user).__dict__
       # return {"user_id":logged["user_id"]},200
+      print(session)
       return {"message": "Sesion iniciada"}, 200
     else:
       return {"message": "Usuario o contraseña incorrectos"}, 401
@@ -33,6 +34,7 @@ class UserAuthController:
     # user_name = ""
     # if "user" in session:
     #   user_name = session['user']
+    print("desde show profile",session)
     user = UserAuth.get_user_by_name(UserAuth(user_name = user_name))
     if user is None:
       return {"message": "Usuario no encontrado"}, 404
@@ -44,5 +46,7 @@ class UserAuthController:
     """
     A user logs out
     """
-    session.pop('user', None)
+    session.pop('user_name', None)
+    if not session:
+      print("Cokkie destruida")
     return {"message": "Sesion cerrada"}, 200

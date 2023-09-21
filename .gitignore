@@ -4,3 +4,4 @@ venv/
 env
 *.http
 consultas
+bash.exe.stackdump
