@@ -125,6 +125,11 @@ content-type: application/json
   "server_id":14
 }
 
+### GET http://127.0.0.1:5000/api/total_msgs/id :
+Devuelve el total de mensajes de un canal. Recibe como parametro en la URL el id del canal a consultar. Ejemplo:
+
+http://127.0.0.1:5000/api/total_msgs/1
+
 ### POST http://127.0.0.1:5000/api/channels :
 Crea un canal usando el método POST. Los datos deben pasarse a través de un JSON, que debe incluir channel_name(str) y server_id(int), este último es el id del servidor en donde se crea el canal. Ejemplo:
 
