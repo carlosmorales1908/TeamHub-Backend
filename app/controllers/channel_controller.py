@@ -34,18 +34,6 @@ class ChannelController:
       }
     channel = Channel.get_only_channel(Channel(channel_id = channel_id))
     return channel.serialize(), 200
-
-  # @classmethod
-  # def get_channels(cls,server_id):
-  #   result = Channel.get_channels(Channel(server_id = server_id))
-  #   channels=[]
-  #   for channel in result:
-  #     channels.append({
-  #       "channel_id" : channel[0],
-  #       "channel_name" : channel[1],
-  #       "server_name" : channel[2]
-  #     })
-  #   return {"Servers":channels, "total":len(channels)},200
   
   @classmethod
   def create_channel(cls):
@@ -133,4 +121,11 @@ class ChannelController:
             "user_id":channel[4],
             "user_name":channel[5],
             "server_id":channel[6]},200
+
+  @classmethod
+  def get_total_msgs_in_channel(cls, channel_id):
+    if not Channel.exists(channel_id):
+      raise NotFound(description= f"Channel with id {channel_id} Not Found")
     
+    channel = Channel.get_total_msgs_in_channel(Channel(channel_id = channel_id))
+    return {"total msgs": channel},200

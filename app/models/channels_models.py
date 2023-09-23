@@ -65,18 +65,6 @@ class Channel:
       )
     return None
   
-  # @classmethod
-  # def get_channels(cls,channel):
-  #   sql = """SELECT c.channel_id, c.channel_name, s.server_name FROM channels c
-  #       INNER JOIN servers s ON c.server_id = s.server_id
-  #       WHERE c.server_id =  %(server_id)s;"""
-  #   params = channel.__dict__
-  #   result = DatabaseConnection.fetch_all(sql, params=params)
-  #   if result is not None:
-  #     return result
-  #   else:
-  #     return None
-  
   @classmethod
   def create_channel(cls,channel):
     """
@@ -149,3 +137,14 @@ class Channel:
       return result
     else:
       return None
+    
+  @classmethod
+  def get_total_msgs_in_channel(cls, channel):
+    query = """select count(message_id)
+    from messages
+    where channel_id = %(channel_id)s"""
+    params = channel.__dict__
+    result = DatabaseConnection.fetch_one(query, params=params)
+    if result is not None:
+      return result
+    return None
