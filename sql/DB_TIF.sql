@@ -17,14 +17,14 @@ CREATE TABLE IF NOT EXISTS users(
     user_name VARCHAR (255) NOT NULL UNIQUE,
     password VARCHAR (255) NOT NULL,
     date_of_birth DATE NOT NULL,
-    profile_picture BLOB
+    profile_picture TEXT(65535)
 )ENGINE=InnoDB CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS servers(
 	server_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     server_name VARCHAR (255) NOT NULL UNIQUE,
     description VARCHAR (255) NOT NULL,
-    img_server BLOB
+    img_server TEXT(65535)
 )ENGINE=InnoDB CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS channels(
