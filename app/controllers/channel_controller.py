@@ -128,4 +128,4 @@ class ChannelController:
       raise NotFound(description= f"Channel with id {channel_id} Not Found")
     
     channel = Channel.get_total_msgs_in_channel(Channel(channel_id = channel_id))
-    return {"total msgs": channel},200
+    return {"total_msgs": channel[0]},200

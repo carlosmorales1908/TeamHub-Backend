@@ -93,7 +93,7 @@ class UserController:
     if ('profile_picture' in data) :
       user.profile_picture=data['profile_picture'] 
     
-    verify_username(user)
+    # verify_username(user)
     # verify_email(user)
 
     User.update_user(user)
