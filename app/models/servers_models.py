@@ -75,10 +75,10 @@ class Server:
       - tuple with servers or
       - None
     """
-    sql = """SELECT * FROM servers;"""
-    # sql = """select s.server_id, s.server_name, s.description, s.img_server, count(s_u.user_id) as total_users from servers s
-    #   inner join server_user s_u on s.server_id = s_u.server_id
-    #   group by s.server_id;"""
+    # sql = """SELECT * FROM servers;"""
+    sql = """SELECT s.server_id, s.server_name, s.description, s.img_server, COUNT(s_u.user_id) FROM servers s
+    INNER JOIN server_user s_u ON s.server_id = s_u.server_id
+    GROUP BY s.server_id;"""
     result = DatabaseConnection.fetch_all(sql)
     if result is not None:
       return result
