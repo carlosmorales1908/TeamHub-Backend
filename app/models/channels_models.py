@@ -34,10 +34,11 @@ class Channel:
       - list or
       - None
     """
-    query = """select c.channel_id, c.channel_name, m.message_id, m.message, m.creation_date, m.user_id from channels c
-          inner join servers s on c.server_id = s.server_id
-          inner join messages m on c.channel_id = m.channel_id
-          where c.channel_id =  %(channel_id)s"""
+    query = """select c.channel_id, c.channel_name, m.message_id, m.message, m.creation_date, m.user_id, u.user_name from channels c
+      inner join servers s on c.server_id = s.server_id
+      inner join messages m on c.channel_id = m.channel_id
+      inner join users u on m.user_id = u.user_id
+      where c.channel_id =  %(channel_id)s"""
     params = channel.__dict__
     result = DatabaseConnection.fetch_all(query, params=params)
     if result is not None:

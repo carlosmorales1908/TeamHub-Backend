@@ -140,7 +140,6 @@ class ServerController:
     server_user = Server_User(**data)
 
     if Server_User.user_server_exist(server_user):
-      # return {'message': 'User already joined to this server'}, 500
       raise BadRequest(description= "User already joined to this server")
     Server_User.join_server(server_user)
     return {'message': 'User joins successfully to server'}, 200

@@ -23,7 +23,8 @@ class ChannelController:
         "message_id":message[2],
         "message":message[3],
         "creation_date":message[4],
-        "user_id":message[5]
+        "user_id":message[5],
+        "user_name": message[6]
       })
     
     if channel:
