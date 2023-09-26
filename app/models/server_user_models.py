@@ -69,3 +69,12 @@ class Server_User:
     query="""INSERT INTO server_user(rol, user_id, server_id) VALUES ("Common", %(user_id)s, %(server_id)s);"""
     params = server_user.__dict__
     DatabaseConnection.execute_query(query, params = params)
+
+  @classmethod
+  def user_server_exist(cls,server_user):
+    """
+    """
+    query="""SELECT * from server_user WHERE server_id = %(server_id)s and user_id = %(user_id)s;"""
+    params = server_user.__dict__
+    result = DatabaseConnection.fetch_one(query, params = params)
+    return bool(result)

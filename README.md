@@ -15,4 +15,4 @@ Nota: el nombre de la BD va incluida pero se puede cambiar a través del script 
 
 ## 4. Para iniciar la API se debe ejecutar el archivo run.py.
 
-## 5. En el archivo api.md se encuentra la documentación para utilizar la API.
+## 5. En el archivo API_DOC.md se encuentra la documentación para utilizar la API.
