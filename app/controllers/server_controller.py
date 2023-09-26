@@ -48,7 +48,8 @@ class ServerController:
         "server_id" : server[0],
         "server_name" : server[1],
         "description" : server[2],
-        "img_server" : server[3]
+        "img_server" : server[3],
+        "total_users": server[4]
       })
     return {"Servers":servers, "total":len(servers)},200
   
