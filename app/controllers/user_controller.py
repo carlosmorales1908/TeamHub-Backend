@@ -1,6 +1,6 @@
 from ..models.user_model import User
 from ..models.server_user_models import Server_User
-from ..models.exceptions import NotFound
+from ..models.exceptions import NotFound, BadRequest
 from ..helpers.helper import *
 from flask import request, session
 
@@ -107,14 +107,16 @@ class UserController:
     # validate_is_string(data["user_name"])
     # user_name = data["user_name"]
     res=Server_User.get_user_server(User(user_id = user_id))
-    servers = []
-    for server in res:
-      servers.append({
-        "server_id" : server[0],
-        "server_name" : server[1],
-        "server_img": server[3]
-      })
-    return {"Servers":servers, "user_id":res[0][2], "user_id":user_id, "user_name":res[0][4]},200
+    if res:
+      servers = []
+      for server in res:
+        servers.append({
+          "server_id" : server[0],
+          "server_name" : server[1],
+          "server_img": server[3]
+        })
+      return {"Servers":servers, "user_id":res[0][2], "user_id":user_id, "user_name":res[0][4]},200
+    raise BadRequest(description= "Not Found Servers")
   
   @classmethod
   def delete(cls, user_id):
