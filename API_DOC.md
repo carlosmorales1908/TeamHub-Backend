@@ -132,19 +132,22 @@ Ejemplo:
       "description": "Servidor dedicado a hablar de programacion",
       "img_server": null,
       "server_id": 1,
-      "server_name": "Server de chinis"
+      "server_name": "Server de chinis",
+      "total_users": 2
     },
     {
       "description": "Servidor dedicado a hablar del Bananero",
       "img_server": null,
       "server_id": 2,
-      "server_name": "Server de John"
+      "server_name": "Server de John",
+      "total_users": 2
     },
     {
       "description": "Servidor dedicado a Probar cositas",
       "img_server": null,
       "server_id": 3,
-      "server_name": "Server de Prueba Intermedia"
+      "server_name": "Server de Prueba Intermedia",
+      "total_users": 3
     }
   ],
   "total": 3
@@ -211,25 +214,29 @@ http://127.0.0.1:5000/api/channels/1
       "creation_date": "Mon, 11 Sep 2023 20:34:31 GMT",
       "message": "Este es el mensaje 1",
       "message_id": 1,
-      "user_id": 1
+      "user_id": 1,
+      "user_name": "Usuario 1"
     },
     {
       "creation_date": "Mon, 11 Sep 2023 20:34:31 GMT",
       "message": "Este es el mensaje 2",
       "message_id": 2,
-      "user_id": 2
+      "user_id": 2,
+      "user_name": "Usuario 2"
     },
     {
       "creation_date": "Mon, 11 Sep 2023 20:34:31 GMT",
       "message": "Este es el mensaje 3",
       "message_id": 3,
-      "user_id": 1
+      "user_id": 1,
+      "user_name": "Usuario 1"
     },
     {
       "creation_date": "Mon, 11 Sep 2023 20:34:31 GMT",
       "message": "Este es el mensaje 4",
       "message_id": 4,
-      "user_id": 2
+      "user_id": 2,
+      "user_name": "Usuario 2"
     }
   ]
 }
