@@ -35,22 +35,25 @@ class UserAuth:
   
   @classmethod
   def get_user_by_name(cls, user):
-    query = """SELECT * FROM users
-    WHERE user_name = %(user_name)s"""
-    params = user.__dict__
-    result = DatabaseConnection.fetch_one(query, params=params)
+    try:
+      query = """SELECT * FROM users
+      WHERE user_name = %(user_name)s"""
+      params = user.__dict__
+      result = DatabaseConnection.fetch_one(query, params=params)
 
-    if result is not None:
-        return cls(
-        user_id = result[0],
-        user_name = result[4],
-        password = result[5],
-        email = result[3],
-        first_name = result[1],
-        last_name = result[2],
-        date_of_birth = result[6]
-        )
-    return None
+      if result is not None:
+          return cls(
+          user_id = result[0],
+          user_name = result[4],
+          password = result[5],
+          email = result[3],
+          first_name = result[1],
+          last_name = result[2],
+          date_of_birth = result[6]
+          )
+      return None
+    except Exception as err:
+      return f'Error al consultar la base de datos: {err}'
 
   @classmethod
   def after_loggin(cls,user):

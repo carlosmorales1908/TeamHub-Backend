@@ -75,15 +75,19 @@ class Server:
       - tuple with servers or
       - None
     """
-    # sql = """SELECT * FROM servers;"""
-    sql = """SELECT s.server_id, s.server_name, s.description, s.img_server, COUNT(s_u.user_id) FROM servers s
-    INNER JOIN server_user s_u ON s.server_id = s_u.server_id
-    GROUP BY s.server_id;"""
-    result = DatabaseConnection.fetch_all(sql)
-    if result is not None:
-      return result
-    else:
-      return None
+    try:
+      # sql = """SELECT * FROM servers;"""
+      sql = """SELECT s.server_id, s.server_name, s.description, s.img_server, COUNT(s_u.user_id) FROM servers s
+      INNER JOIN server_user s_u ON s.server_id = s_u.server_id
+      GROUP BY s.server_id;"""
+      result = DatabaseConnection.fetch_all(sql)
+      if result is not None:
+        return result
+      else:
+        return None
+    except Exception as err:
+      return f'Error al consultar la base de datos: {err}'
+
     
   @classmethod
   def create_server(cls,server):
