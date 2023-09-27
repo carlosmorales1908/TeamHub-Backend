@@ -12,7 +12,7 @@ class Message:
     self.message = kwargs.get('message')
     self.creation_date = kwargs.get('creation_date')
     self.user_id = kwargs.get('user_id')
-    self.channel_id = kwargs.get('user_id')
+    self.channel_id = kwargs.get('channel_id')
 
   def serialize(self):
     """
@@ -25,7 +25,7 @@ class Message:
       "message": self.message,
       "creation_date": self.creation_date,
       "user_id": self.user_id,
-      "channel_id": self.user_id
+      "channel_id": self.channel_id
     }
   
   @classmethod
