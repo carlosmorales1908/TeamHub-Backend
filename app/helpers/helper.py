@@ -32,7 +32,7 @@ def validate_len(data):
   Validate if the data len is less than 3
   """
   if len(data) < 3:
-    raise BadRequest(description = f"{data} must have more than 4 characters")
+    raise BadRequest(description = f"{data} must have more than 2 characters")
     
 def validate_len_password(password):
   """

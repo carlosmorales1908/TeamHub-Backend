@@ -252,7 +252,7 @@ content-type: application/json
   "server_id":1
 }
 
-#### **Devuelve**:
+#### **Devuelve SI es el creador del servidor**:
 
 {
   "Channels": [
@@ -275,6 +275,26 @@ content-type: application/json
   "user_id": 1,
 
   "user_name": "John Doe"
+}
+
+#### **Devuelve si NO es el creador del servidor**:
+{
+  "Channels": [
+
+    {
+      "channel_id": 1,
+      "channel_name": "JavaScript"
+    }
+  ],
+  "rol": "Common",
+
+  "server_id": 1,
+
+  "server_name": "Server de John",
+
+  "user_id": 2,
+  
+  "user_name": "Chinis"
 }
 ### GET http://127.0.0.1:5000/api/total_msgs/id :
 Devuelve el total de mensajes de un canal. Recibe como parametro en la URL el id del canal a consultar. Ejemplo:
