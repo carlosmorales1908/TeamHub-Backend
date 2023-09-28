@@ -31,7 +31,8 @@ class User:
       "email": self.email,
       "first_name": self.first_name,
       "last_name": self.last_name,
-      "date_of_birth": (self.date_of_birth).strftime("%d/%m/%y")
+      "date_of_birth": (self.date_of_birth).strftime("%d/%m/%y"),
+      "profile_picture": self.profile_picture
     }
   
   @classmethod
@@ -75,7 +76,8 @@ class User:
         email = result[3],
         first_name = result[4],
         last_name = result[5],
-        date_of_birth = result[6]
+        date_of_birth = result[6],
+        profile_picture=result[7]
         )
     return None
   
@@ -102,7 +104,8 @@ class User:
         email = result[3],
         first_name = result[1],
         last_name = result[2],
-        date_of_birth = result[6]
+        date_of_birth = result[6],
+        profile_picture=result[7]
       )
     return None
   

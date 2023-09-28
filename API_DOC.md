@@ -31,7 +31,9 @@ http://127.0.0.1:5000/api/users/1
 
   "user_id": 1,
 
-  "user_name": "John Doe"
+  "user_name": "John Doe",
+
+  "profile_picture": (una imagen en b64 como string)
 }
 ### GET http://127.0.0.1:5000/api/user_server/id :
 Devuelve los servidores creados y a los cuales se encuentra unido un usuario a través de su id. Ejemplo:
