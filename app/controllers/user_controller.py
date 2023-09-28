@@ -113,7 +113,8 @@ class UserController:
         servers.append({
           "server_id" : server[0],
           "server_name" : server[1],
-          "server_img": server[3]
+          "server_img": server[3],
+          "rol": server[5]
         })
       return {"Servers":servers, "user_id":res[0][2], "user_id":user_id, "user_name":res[0][4]},200
     raise BadRequest(description= "Not Found Servers")

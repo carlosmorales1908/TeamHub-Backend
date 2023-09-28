@@ -44,11 +44,13 @@ http://127.0.0.1:5000/api/user_server/1
   "Servers": [
 
     {
+      "rol": "Admin"
       "server_id": 1,
       "server_img": null,
       "server_name": "Server de John"
     },
     {
+      "rol": "Common"
       "server_id": 2,
       "server_img": null,
       "server_name": "Server de Francis"
@@ -423,7 +425,9 @@ Devuelve los datos del usuario que inicia sesión. No recibe ningún parametro y
 
   "user_id": 1,
 
-  "user_name": "John Doe"
+  "user_name": "John Doe",
+
+  "profile_picture": (una imagen en b64 como string)
 }
 
 ### GET http://127.0.0.1:5000/auth/logout :
