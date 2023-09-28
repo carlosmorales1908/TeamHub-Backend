@@ -38,7 +38,8 @@ class Channel:
       inner join servers s on c.server_id = s.server_id
       inner join messages m on c.channel_id = m.channel_id
       inner join users u on m.user_id = u.user_id
-      where c.channel_id =  %(channel_id)s"""
+      where c.channel_id =  %(channel_id)s
+      order by m.creation_date;"""
     params = channel.__dict__
     result = DatabaseConnection.fetch_all(query, params=params)
     if result is not None:
