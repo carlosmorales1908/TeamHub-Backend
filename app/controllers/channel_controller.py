@@ -50,6 +50,7 @@ class ChannelController:
     validate_is_int(data["server_id"])
     validate_len(data["channel_name"])
 
+    verify_channel_exist_in_server(data["channel_name"],data["server_id"])
     invalid_data('channel_id',data)
     # ---
 

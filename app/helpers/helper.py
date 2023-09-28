@@ -1,6 +1,7 @@
 from ..models.exceptions import BadRequest, Forbidden, ServerError
 from ..models.user_model import User
 from ..models.servers_models import Server
+from ..models.channels_models import Channel
 from datetime import date
 
 def validate_dob(dob):
@@ -82,3 +83,10 @@ def verify_servername(server):
   """
   if Server.verify_servername(server):
     raise BadRequest(description="server_name already exist")
+  
+def verify_channel_exist_in_server(channel_name,server_id):
+  """
+  Validate if a channel already exist in a server
+  """
+  if Channel.exists_by_name(channel_name,server_id):
+    raise BadRequest(description="channel already exist in this server")

@@ -117,6 +117,13 @@ class Channel:
     params = channel_id,
     result = DatabaseConnection.fetch_one(query, params=params)
     return bool(result)
+  
+  @classmethod
+  def exists_by_name(cls,channel_name,server_id):
+    query = """SELECT * FROM channels WHERE channel_name = %s and server_id = %s;"""
+    params = (channel_name,server_id)
+    result = DatabaseConnection.fetch_one(query, params=params)
+    return bool(result)
 
   @classmethod
   def show_channels_server(cls,server_user):
