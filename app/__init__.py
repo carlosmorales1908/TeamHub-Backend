@@ -32,7 +32,7 @@ def init_app():
   @app.before_request
   def antes_de_cada_peticion():
     ruta = request.path
-    if not 'user' in session and ruta != "/login" and ruta != "/profile" and ruta != "/logout" and not ruta.startswith("/auth"):
+    if not 'user_name' in session and ruta != "/login" and ruta != "/profile" and ruta != "/logout" and not ruta.startswith("/auth"):
         return {"msg":"Debes iniciar sesion primero"},404
   # -----
     
