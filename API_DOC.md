@@ -7,7 +7,7 @@
  ## 2. [Path relacionados a Servers](#id2)
  ## 3. [Path relacionados a Channels](#id3)
  ## 4. [Path relacionados a Mesages](#id4)
- ## 5. [Path relacionados a Authetication](#id5)
+ ## 5. [Path relacionados a Authentication](#id5)
 
 <div id='id1' />
 
